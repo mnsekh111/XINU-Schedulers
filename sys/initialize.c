@@ -13,6 +13,7 @@
 #include <q.h>
 #include <io.h>
 #include <stdio.h>
+#include <sched.h>
 
 /*#define DETAIL */
 #define HOLESIZE	(600)	
@@ -49,6 +50,7 @@ int	console_dev;		/* console device			*/
 int	rdyhead, rdytail;	/* head/tail of ready list (q indicies)	*/
 char	vers[100];		/* Xinu version printed at startup	*/
 
+int scheduleclass = DEFAULTSCHED;
 /************************************************************************/
 /***				NOTE:				      ***/
 /***								      ***/
