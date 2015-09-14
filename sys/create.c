@@ -67,7 +67,7 @@ SYSCALL create(procaddr,ssize,priority,name,nargs,args)
 	pptr->pnxtkin = BADPID;
 	pptr->pdevs[0] = pptr->pdevs[1] = pptr->ppagedev = BADDEV;
 
-	pptr->pgoodness = -1;
+	pptr->pgoodness =0;
 	pptr->pcounter = 0;
 	pptr->pquantum = 0;
 

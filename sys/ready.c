@@ -17,7 +17,7 @@ int ready(int pid, int resch)
 		return(SYSERR);
 	pptr = &proctab[pid];
 	pptr->pstate = PRREADY;
-	insert(pid,rdyhead,pptr->pprio);
+	insert(pid,rdyhead,pptr->pgoodness);
 	if (resch)
 		resched();
 	return(OK);

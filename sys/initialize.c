@@ -174,6 +174,10 @@ LOCAL int sysinit()
 	pptr->pprio = 0;
 	currpid = NULLPROC;
 
+	pptr->pgoodness =-1;
+	pptr->pcounter = -1;
+	pptr->pquantum = -1;
+
 	for (i=0 ; i<NSEM ; i++) {	/* initialize semaphores */
 		(sptr = &semaph[i])->sstate = SFREE;
 		sptr->sqtail = 1 + (sptr->sqhead = newqueue());
