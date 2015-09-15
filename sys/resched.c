@@ -33,6 +33,7 @@ int resched() {
 			optr->pgoodness -= (QUANTUM - preempt);
 			epoch -= (QUANTUM - preempt);
 		} else {
+			//kprintf("NULL PROC %d\n",optr->pcounter);
 			epoch = 0;
 		}
 
@@ -41,7 +42,7 @@ int resched() {
 			epoch = 0;
 			q[rdyhead].qnext = rdytail;
 			q[rdytail].qprev = rdyhead;
-			for (i = 1; i < NPROC; ++i) {
+			for (i = NPROC-1; i >0; --i) {
 				//proctab[i].pprio = proctab[i].pnewprio;
 				if (proctab[i].pstate != PRFREE) {
 
@@ -67,13 +68,19 @@ int resched() {
 //			kprintf("\n");
 
 		int next_proc;
+		int prev = q[rdytail].qprev;
 
-		if (optr->pcounter > 0) {
+		if (optr->pcounter > 0 && optr->pstate == PRCURR) {
 			enable(ps);
-			preempt = QUANTUM;
-			return (OK);
+
+			if (proctab[prev].pcounter > optr->pcounter)
+				next_proc = prev;
+			else {
+				preempt = QUANTUM;
+				return (OK);
+			}
 		} else {
-			int prev = q[rdytail].qprev;
+
 			while (prev != rdyhead) {
 				if (proctab[prev].pcounter > 0) {
 					next_proc = prev;
