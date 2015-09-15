@@ -37,6 +37,9 @@
 
 #define	isbadpid(x)	(x<=0 || x>=NPROC)
 
+#define NORMALPROC 0;
+#define REALTIMEPROC 1;
+
 /* process table entry */
 
 struct pentry {
@@ -64,6 +67,7 @@ struct pentry {
 	int pquantum; /* number of quantums in the epoch*/
 	int pgoodness; /* goodness of proc */
 	int pnewprio; /* new priority */
+	int ptype; /*normal or real time process*/
 };
 
 extern struct pentry proctab[];

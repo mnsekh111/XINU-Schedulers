@@ -70,6 +70,7 @@ SYSCALL create(procaddr,ssize,priority,name,nargs,args)
 	pptr->pgoodness =0;
 	pptr->pcounter = 0;
 	pptr->pquantum = 0;
+	pptr->ptype = NORMALPROC;
 
 		/* Bottom of stack */
 	*saddr = MAGIC;
@@ -102,6 +103,12 @@ SYSCALL create(procaddr,ssize,priority,name,nargs,args)
 
 	restore(ps);
 	return(pid);
+}
+
+SYSCALL createReal(procaddr,ssize,priority,name,nargs,args){
+	int		pid = create(procaddr,ssize,priority,name,nargs,args);
+	proctab[pid].ptype = REALTIMEPROC;
+	return (pid);
 }
 
 /*------------------------------------------------------------------------
