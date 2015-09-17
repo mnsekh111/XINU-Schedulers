@@ -33,17 +33,16 @@ int resched() {
 			optr->pgoodness -= (QUANTUM - preempt);
 			epoch -= (QUANTUM - preempt);
 		} else {
-			//kprintf("NULL PROC %d\n",optr->pcounter);
 			epoch = 0;
 		}
 
-		//If current epoch is completer
+		//If current epoch is completed
 		if (epoch <= 0) {
 			epoch = 0;
 			q[rdyhead].qnext = rdytail;
 			q[rdytail].qprev = rdyhead;
 			for (i = NPROC - 1; i > 0; --i) {
-				//proctab[i].pprio = proctab[i].pnewprio;
+				proctab[i].pprio = proctab[i].pnewprio;
 				if (proctab[i].pstate != PRFREE) {
 
 					if (proctab[i].pcounter <= 0) {
@@ -96,7 +95,6 @@ int resched() {
 			optr->pstate = PRREADY;
 			insert(currpid, rdyhead, optr->pgoodness);
 		}
-		/* remove highest priority process at end of ready list */
 
 		nptr = &proctab[currpid = dequeue(next_proc)];
 		nptr->pstate = PRCURR; /* mark it currently running	*/
@@ -120,18 +118,16 @@ int resched() {
 			optr->pgoodness -= (QUANTUM - preempt);
 			epoch -= (QUANTUM - preempt);
 		} else {
-			//kprintf("NULL PROC %d\n",optr->pcounter);
 			epoch = 0;
 		}
 
-		//If current epoch is completer
+		//If current epoch is completed
 		if (epoch <= 0) {
 			int chance = rand() % 100;
 			epoch = 0;
 			q[rdyhead].qnext = rdytail;
 			q[rdytail].qprev = rdyhead;
 			for (i = NPROC - 1; i > 0; --i) {
-				//proctab[i].pprio = proctab[i].pnewprio;
 				if (proctab[i].pstate != PRFREE) {
 
 					if (chance < 70) {
@@ -196,7 +192,6 @@ int resched() {
 			optr->pstate = PRREADY;
 			insert(currpid, rdyhead, optr->pgoodness);
 		}
-		/* remove highest priority process at end of ready list */
 
 		nptr = &proctab[currpid = dequeue(next_proc)];
 		nptr->pstate = PRCURR; /* mark it currently running	*/

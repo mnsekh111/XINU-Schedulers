@@ -66,7 +66,6 @@ struct pentry {
 	int pcounter; /* number of ticks remaining in quantum */
 	int pquantum; /* number of quantums in the epoch*/
 	int pgoodness; /* goodness of proc */
-	int pnewprio; /* new priority */
 	int ptype; /*normal or real time process*/
 };
 
