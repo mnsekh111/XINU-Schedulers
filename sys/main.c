@@ -178,6 +178,68 @@ int main() {
 	kill(prA);
 	kill(prB);
 
+	kprintf("\n\n########## Test Case11, multi-q scheduling(3 processes):\n");
+	setschedclass(MULTIQSCHED);
+	printf("Scheduler = %d\n", getschedclass());
+	total_cnt = 0;
+	a_percent = 0;
+	b_percent = 0;
+	prA = create(proc_a, 2000, 100, "proc A", 1, 'A');
+	prB = createReal(proc_b, 2000, 10, "proc B", 1, 'B');
+	resume(prA);
+	resume(prB);
+	sleep(5);
+	kill(prA);
+	kill(prB);
+	total_cnt = a_cnt + b_cnt;
+	a_percent = (double) a_cnt / total_cnt * 100;
+	b_percent = (double) b_cnt / total_cnt * 100;
+	kprintf("Test RESULT: A = %d, B = %d (%d : %d)\n", a_cnt, b_cnt,
+			(int) a_percent, (int) b_percent);
+
+	kprintf("\n\n########## Test Case12, multi-q scheduling(4 processes):\n");
+	total_cnt = 0;
+	a_percent = 0;
+	b_percent = 0;
+	c_percent = 0;
+	a_cnt = b_cnt = c_cnt = 0;
+	prA = create(proc_a, 2000, 100, "proc A", 1, 'A');
+	prB = createReal(proc_b, 2000, 10, "proc B", 1, 'B');
+	prC = createReal(proc_c, 2000, 10, "proc C", 1, 'C');
+	resume(prA);
+	resume(prB);
+	resume(prC);
+	sleep(10);
+	kill(prA);
+	kill(prB);
+	kill(prC);
+	total_cnt = a_cnt + b_cnt + c_cnt;
+	a_percent = (double) a_cnt / total_cnt * 100;
+	b_percent = (double) b_cnt / total_cnt * 100;
+	c_percent = (double) c_cnt / total_cnt * 100;
+	kprintf("Test RESULT: A = %d, B = %d, C = %d (%d : %d : %d)\n", a_cnt,
+			b_cnt, c_cnt, (int) a_percent, (int) b_percent, (int) c_percent);
+
+	kprintf(
+			"\n\n########## Test Case13, multi-q scheduling without real proc(3 processes):\n");
+	setschedclass(MULTIQSCHED);
+	total_cnt = 0;
+	a_percent = 0;
+	b_percent = 0;
+	a_cnt = 0;
+	b_cnt = 0;
+	prA = create(proc_a, 2000, 100, "proc A", 1, 'A');
+	prB = create(proc_b, 2000, 100, "proc B", 1, 'B');
+	resume(prA);
+	resume(prB);
+	sleep(5);
+	kill(prA);
+	kill(prB);
+	total_cnt = a_cnt + b_cnt;
+	a_percent = (double) a_cnt / total_cnt * 100;
+	b_percent = (double) b_cnt / total_cnt * 100;
+	kprintf("Test RESULT: A = %d, B = %d (%d : %d)\n", a_cnt, b_cnt,
+			(int) a_percent, (int) b_percent);
 
 }
 

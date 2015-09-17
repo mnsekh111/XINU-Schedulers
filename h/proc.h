@@ -37,8 +37,8 @@
 
 #define	isbadpid(x)	(x<=0 || x>=NPROC)
 
-#define NORMALPROC 0;
-#define REALTIMEPROC 1;
+#define NORMALPROC 0
+#define REALTIMEPROC 1
 
 /* process table entry */
 
