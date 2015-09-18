@@ -1,0 +1,36 @@
+What are the advantages and disadvantages of each of the two scheduling policies and the original scheduling policy in XINU?
+
+
+LINUX like Scheduler (Advantages)
+1) There is no starvation as every runnable process gets its share in an epoch.
+2) It has better turn around time.
+3) This scheduler gives greater opportunity for blocked processes to complete their quantum.
+
+LINUX like Scheduler (Disadvantages)
+
+1) If a process goes to blocked state, then the quantum that remains in previous epoch is carried to next epoch. So this can 
+lead to gaming of scheduler as the programmer can voluntarily relinquish cpu to get more quantums next time.
+2) This scheduler switches between processes very frequently and hence there is high overhead because of context switching.
+
+
+DEFAULT Scheculer (Advantages)
+1)Whenever a higher priority process enters the system, it will be directly given cpu. Hence response time for high
+priority processes (User interactive processes have high priority) is practivally 0. 
+
+DEFAULT Scheduler (Disadvantages)
+1) Low priority process face huge starvation as they might never get a chance new high
+priority processes are continuously generated.
+2) Turnaround time for low priority process will be large.
+
+MULTIQUEUE Scheduler (Advantages)
+1) Realtime process are maintained in a separate queue and hence executed more frequently there by reducing their response and 
+turn around time
+2) Normal processes are not blocked by the realtime processes with high priority as they too get some fair share of cpu.
+
+MULTIQUEUE Scheduler (Disadvantages)
+1) The processes in the realtime queue are given equal quantms and there is no strict ordering among them.
+2) A normal process can have priority greater than any other process in the real time queue. This process will always remain in the
+normal queue and hence will have high turn around time
+3) Round robin algorithm for real time processes may increase context switching cost.
+
+NOTE TO THE GRADER : Test case 9 hangs a bit.

@@ -1,0 +1,14 @@
+C:\Users\sekhs_000\Documents\GitHub\csc501-lab0>git diff --stat 002ec5 46c04 .
+WARNING: terminal is not fully functional
+ .cproject        |  40 ++++++
+ .project         |  27 ++++
+ compile/Makefile |   2 +-
+ h/proc.h         |  60 +++++----
+ h/sched.h        |  12 ++
+ sys/create.c     |  11 ++
+ sys/initialize.c |   6 +
+ sys/main.c       | 393 +++++++++++++++++++++++++++++++++++++++++++++++++++++--
+ sys/ready.c      |   2 +-
+ sys/resched.c    | 239 +++++++++++++++++++++++++++++----
+ sys/schedclass.c |  20 +++
+ 11 files changed, 747 insertions(+), 65 deletions(-)
